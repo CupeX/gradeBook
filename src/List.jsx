@@ -4,9 +4,12 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      value: "",
+      //search
+      search: "",
     };
 
+    this.updateSearch = this.updateSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -17,14 +20,28 @@ class List extends React.Component {
 
   handleSubmit(event) {
     this.setState({
-      value: ""
+      value: "",
     });
 
     this.props.addFunction(this.state.value);
     event.preventDefault();
   }
 
+  // update search
+  updateSearch(event) {
+    this.setState({ search: event.target.value });
+  }
+
   render() {
+    // search
+    const filteredList =
+      this.state.search !== ""
+        ? this.props.currList.filter(
+            (listItem) =>
+              listItem.toLowerCase().indexOf(this.state.search) !== -1
+          )
+        : this.props.currList;
+
     return (
       <div className="col-6 mx-auto">
         {/*Replace the code below to call the title prop*/}
@@ -39,14 +56,34 @@ class List extends React.Component {
               onChange={this.handleChange}
             />
           </label>
+
           <input className="btn btn-sm" type="submit" value="Submit" />
+
+          {/* search */}
+          <label>
+            <input
+              placeholder="Search"
+              className="form-control input-sm"
+              type="text"
+              value={this.state.search}
+              onChange={this.updateSearch}
+            />
+          </label>
         </form>
+
         <ul className="Box">
           <div className="Box-header">{this.props.title}</div>
-          {this.props.currList.map((item, index) => (
+          {filteredList.map((item, index) => (
             <li className="Box-row" key={index}>
               {" "}
-              {item}{" "}
+              {item}
+              {/* remove button */}
+              <input
+                className="btn btn-sm float-right"
+                type="button"
+                value="remove"
+                onClick={() => this.props.removeFunction(index)}
+              />
             </li>
           ))}
         </ul>

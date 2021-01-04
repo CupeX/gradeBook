@@ -10,7 +10,7 @@ class App extends React.Component {
       buttonClicked: "",
       assignments: [] /*Below this line, add the students state variable*/,
       students: [],
-      grades: {}
+      grades: {},
     };
 
     this.handleButtonClicked = this.handleButtonClicked.bind(this);
@@ -18,27 +18,31 @@ class App extends React.Component {
     /*Uncomment the line below to bind the method*/
     this.addStudent = this.addStudent.bind(this);
     this.addGrade = this.addGrade.bind(this);
+    this.removeAssignment = this.removeAssignment.bind(this);
+    this.removeStudent = this.removeStudent.bind(this);
+    // this.deleteRow = this.deleteRow.bind(this);
   }
 
   handleButtonClicked(buttonName) {
     this.setState({
-      buttonClicked: buttonName
+      buttonClicked: buttonName,
     });
   }
 
   /*Check out this addAssignment method*/
   addAssignment(assignmentName) {
     this.setState({
-      assignments: this.state.assignments.concat(assignmentName)
+      assignments: this.state.assignments.concat(assignmentName),
     });
   }
 
   /*Write an addStudent method here*/
   addStudent(studentName) {
     this.setState({
-      students: this.state.students.concat(studentName)
+      students: this.state.students.concat(studentName),
     });
   }
+
   addGrade(assignment, student, score) {
     let grades = this.state.grades;
     let assignmentName = assignment;
@@ -50,6 +54,27 @@ class App extends React.Component {
     this.setState({ grades: grades });
   }
 
+  removeAssignment(index) {
+    const newList = this.state.assignments.filter(
+      (_, listIndex) => index !== listIndex
+    );
+    this.setState({ assignments: newList });
+  }
+
+  removeStudent(index) {
+    const newList1 = this.state.students.filter(
+      (_, listIndex) => index !== listIndex
+    );
+    this.setState({ students: newList1 });
+  }
+
+  // test for deleting only one row(name) in grades
+  // deleteRow(index) {
+  //   const newList2 = [...this.state.students];
+  //   newList2.splice(index, 1);
+  //   this.setState({ students: newList2 });
+  // }
+
   render() {
     let tabChoice = <div />;
 
@@ -60,6 +85,7 @@ class App extends React.Component {
           placeholder="Add Assignment..."
           currList={this.state.assignments}
           addFunction={this.addAssignment}
+          removeFunction={this.removeAssignment}
           title="Assignments"
         />
       );
@@ -70,9 +96,10 @@ class App extends React.Component {
     if (this.state.buttonClicked === "students") {
       tabChoice = (
         <List
-          placeholder="Add Student..." 
+          placeholder="Add Student..."
           currList={this.state.students}
           addFunction={this.addStudent}
+          removeFunction={this.removeStudent}
           title="Student Roster"
         />
       );
@@ -85,6 +112,8 @@ class App extends React.Component {
           tableNames={this.state.assignments}
           rows={this.state.students}
           addFunction={this.addGrade}
+          removeFunction={this.removeAssignment}
+          removeFunction1={this.removeStudent}
           data={this.state.grades}
         />
       );
