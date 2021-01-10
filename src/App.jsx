@@ -76,10 +76,10 @@ class App extends React.Component {
   }
 
   removeStudent(index) {
-    const newList1 = this.state.students.filter(
+    const newList = this.state.students.filter(
       (_, listIndex) => index !== listIndex
     );
-    this.setState({ students: newList1 });
+    this.setState({ students: newList });
   }
 
   render() {
