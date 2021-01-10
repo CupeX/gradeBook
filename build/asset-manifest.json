@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gradeBook/static/css/main.498d002a.chunk.css",
+    "main.js": "/gradeBook/static/js/main.dec1b03c.chunk.js",
+    "main.js.map": "/gradeBook/static/js/main.dec1b03c.chunk.js.map",
+    "runtime-main.js": "/gradeBook/static/js/runtime-main.ac4cfa8d.js",
+    "runtime-main.js.map": "/gradeBook/static/js/runtime-main.ac4cfa8d.js.map",
+    "static/js/2.b0b194b5.chunk.js": "/gradeBook/static/js/2.b0b194b5.chunk.js",
+    "static/js/2.b0b194b5.chunk.js.map": "/gradeBook/static/js/2.b0b194b5.chunk.js.map",
+    "index.html": "/gradeBook/index.html",
+    "precache-manifest.e1b34c0b26d66ac6d31a6f34e8c352af.js": "/gradeBook/precache-manifest.e1b34c0b26d66ac6d31a6f34e8c352af.js",
+    "service-worker.js": "/gradeBook/service-worker.js",
+    "static/css/main.498d002a.chunk.css.map": "/gradeBook/static/css/main.498d002a.chunk.css.map",
+    "static/js/2.b0b194b5.chunk.js.LICENSE.txt": "/gradeBook/static/js/2.b0b194b5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ac4cfa8d.js",
+    "static/js/2.b0b194b5.chunk.js",
+    "static/css/main.498d002a.chunk.css",
+    "static/js/main.dec1b03c.chunk.js"
+  ]
+}

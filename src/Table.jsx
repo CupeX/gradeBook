@@ -22,18 +22,7 @@ class Table extends React.Component {
 
   // update search
   updateSearch(event) {
-    this.setState({ search: event.target.value });
-  }
-
-  render() {
-    // search
-    const filteredList =
-      this.state.search !== ""
-        ? this.props.rows.filter(
-            (listItem) =>
-              listItem.toLowerCase().indexOf(this.state.search) !== -1
-          )
-        : this.props.rows;
+    this.setState({ search: event.target.value.toLowerCase() });
   }
 
   createRows(name) {
@@ -56,7 +45,7 @@ class Table extends React.Component {
               className="btn btn-sm "
               type="button"
               value="remove"
-              onClick={() => this.props.removeFunction1(index)}
+              onClick={() => this.props.removeStudent(index)}
             />
           </div>
         ))}
@@ -65,6 +54,16 @@ class Table extends React.Component {
   }
   // eslint-disable-next-line no-dupe-class-members
   render() {
+    // search
+    const filteredList =
+      this.state.search !== ""
+        ? this.props.tableNames.filter(
+            (listItem) =>
+              listItem.toLowerCase().indexOf(this.state.search) !== -1
+          )
+        : this.props.tableNames;
+    console.log(filteredList);
+
     return (
       <div>
         {/* search */}
@@ -89,7 +88,7 @@ class Table extends React.Component {
                   className="btn btn-sm float-right"
                   type="button"
                   value="remove"
-                  onClick={() => this.props.removeFunction(index)}
+                  onClick={() => this.props.removeAssignment(index)}
                 />
               </div>
 

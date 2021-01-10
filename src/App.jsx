@@ -8,19 +8,19 @@ class App extends React.Component {
 
     this.state = {
       buttonClicked: "",
-      assignments: [] /*Below this line, add the students state variable*/,
+      assignments: [],
       students: [],
       grades: {},
     };
 
     this.handleButtonClicked = this.handleButtonClicked.bind(this);
     this.addAssignment = this.addAssignment.bind(this);
-    /*Uncomment the line below to bind the method*/
     this.addStudent = this.addStudent.bind(this);
     this.addGrade = this.addGrade.bind(this);
+
+    // added remove
     this.removeAssignment = this.removeAssignment.bind(this);
     this.removeStudent = this.removeStudent.bind(this);
-    // this.deleteRow = this.deleteRow.bind(this);
   }
 
   handleButtonClicked(buttonName) {
@@ -29,15 +29,29 @@ class App extends React.Component {
     });
   }
 
-  /*Check out this addAssignment method*/
   addAssignment(assignmentName) {
+    // added check for existing assignment or empty input
+    if (
+      !assignmentName ||
+      this.state.assignments.findIndex(
+        (assignment) => assignment === assignmentName
+      ) !== -1
+    ) {
+      return;
+    }
     this.setState({
       assignments: this.state.assignments.concat(assignmentName),
     });
   }
 
-  /*Write an addStudent method here*/
   addStudent(studentName) {
+    // added check for existing student or empty input
+    if (
+      !studentName ||
+      this.state.students.findIndex((student) => student === studentName) !== -1
+    ) {
+      return;
+    }
     this.setState({
       students: this.state.students.concat(studentName),
     });
@@ -68,17 +82,9 @@ class App extends React.Component {
     this.setState({ students: newList1 });
   }
 
-  // test for deleting only one row(name) in grades
-  // deleteRow(index) {
-  //   const newList2 = [...this.state.students];
-  //   newList2.splice(index, 1);
-  //   this.setState({ students: newList2 });
-  // }
-
   render() {
     let tabChoice = <div />;
 
-    /*Uncomment below to render assignments*/
     if (this.state.buttonClicked === "assignments") {
       tabChoice = (
         <List
@@ -90,8 +96,6 @@ class App extends React.Component {
         />
       );
     }
-
-    /* Change below to render students*/
 
     if (this.state.buttonClicked === "students") {
       tabChoice = (
@@ -105,15 +109,14 @@ class App extends React.Component {
       );
     }
 
-    /* Uncomment lines below to render grades*/
     if (this.state.buttonClicked === "grades") {
       tabChoice = (
         <Table
           tableNames={this.state.assignments}
           rows={this.state.students}
           addFunction={this.addGrade}
-          removeFunction={this.removeAssignment}
-          removeFunction1={this.removeStudent}
+          removeAssignment={this.removeAssignment}
+          removeStudent={this.removeStudent}
           data={this.state.grades}
         />
       );
